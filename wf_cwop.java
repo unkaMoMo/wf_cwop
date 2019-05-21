@@ -94,9 +94,10 @@ class wf_cwop {
             (wf_cwop.props = new Properties()).load(new FileInputStream(propsFile));
         } catch (FileNotFoundException ex) {
             System.out.println("The Properties file wasn't found.");
-            System.out.println("Check that the file:'UDPReader.conf' is in the UDPReader directory, ");
+            System.out.println("Check that the file:'wf_cwop.conf' is in the wf_cwop directory, ");
             System.out.println("or specify the name of your properties file as a command line argument if different.");
             System.out.println("System will now exit");
+            System.exit(0);
         }
         wf_cwop.precipHourList = new float[60];
         wf_cwop.rain24H = new float[1440];
@@ -277,8 +278,8 @@ class wf_cwop {
             for (int i = 0; i < precipHourList.length - 1; i++) {
                 rainHour += precipHourList[i];
             }
-            System.out.println("Rain this hour = " + rainHour * 0.039370078740157f + " inches");
-            System.out.println("Rain since midnight = " + rainSinceMidnight * 0.039370078740157f + " inches");
+            System.out.println("Rain this hour = " + rainHour * 0.039370078740157 + " inches");
+            System.out.println("Rain since midnight = " + rainSinceMidnight * 0.039370078740157 + " inches");
             cwop24H = 0;
             cwoprainHour = rainHour;
             rain24H[Index24] = WF_RainThisMinute;
@@ -286,8 +287,9 @@ class wf_cwop {
                 cwop24H += rain24H[i];
             }
             Index24++;
-            System.out.println("Rain 24 hours = " + cwop24H * 0.03937007874015f + " inches");
-            hourIndex++;            
+            System.out.println("Rain 24 hours = " + cwop24H * 0.03937007874015 + " inches");
+            hourIndex++;
+            WF_RainThisMinute = 0;            
         }
     }
     
